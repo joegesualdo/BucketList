@@ -25,6 +25,7 @@
 		E93B70C719B0C77800763CF1 /* JGCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = E93B70C619B0C77800763CF1 /* JGCoreDataStack.m */; };
 		E93B70CA19B0D19F00763CF1 /* JGBucketListEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = E93B70C919B0D19F00763CF1 /* JGBucketListEntry.m */; };
 		E93B70CC19B0D83000763CF1 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E93B70CB19B0D83000763CF1 /* MainStoryboard.storyboard */; };
+		E93B70CF19B0D9E900763CF1 /* JGNewItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E93B70CE19B0D9E900763CF1 /* JGNewItemViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,8 @@
 		E93B70C819B0D19F00763CF1 /* JGBucketListEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGBucketListEntry.h; sourceTree = "<group>"; };
 		E93B70C919B0D19F00763CF1 /* JGBucketListEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGBucketListEntry.m; sourceTree = "<group>"; };
 		E93B70CB19B0D83000763CF1 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
+		E93B70CD19B0D9E900763CF1 /* JGNewItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JGNewItemViewController.h; path = ../JGNewItemViewController.h; sourceTree = "<group>"; };
+		E93B70CE19B0D9E900763CF1 /* JGNewItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JGNewItemViewController.m; path = ../JGNewItemViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +126,8 @@
 		E93B709819B0C28300763CF1 /* JGBucketList */ = {
 			isa = PBXGroup;
 			children = (
+				E93B70CD19B0D9E900763CF1 /* JGNewItemViewController.h */,
+				E93B70CE19B0D9E900763CF1 /* JGNewItemViewController.m */,
 				E93B70C519B0C77800763CF1 /* JGCoreDataStack.h */,
 				E93B70C619B0C77800763CF1 /* JGCoreDataStack.m */,
 				E93B70A119B0C28300763CF1 /* JGAppDelegate.h */,
@@ -268,6 +273,7 @@
 				E93B70C719B0C77800763CF1 /* JGCoreDataStack.m in Sources */,
 				E93B70CA19B0D19F00763CF1 /* JGBucketListEntry.m in Sources */,
 				E93B70A319B0C28300763CF1 /* JGAppDelegate.m in Sources */,
+				E93B70CF19B0D9E900763CF1 /* JGNewItemViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
