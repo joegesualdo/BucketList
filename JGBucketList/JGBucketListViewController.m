@@ -8,8 +8,14 @@
 
 #import "JGBucketListViewController.h"
 #import "JGCoreDataStack.h"
+#import "JGBucketListEntry.h"
 
-@interface JGBucketListViewController ()
+@interface JGBucketListViewController () <NSFetchedResultsControllerDelegate>
+
+// What is a NSFetchedResultsController?
+//    class that takes a fetch request and executes it. Instead of executing it one and returning the results, it will execute it and later on let us know of any changes to the result happen. It does so through delegatioin -- like the method in this controller called: controllerDidChangeContent
+// Create a new private property to represent our Fetch controller
+@property(strong, nonatomic)NSFetchedResultsController *fetchedResultsController;
 
 @end
 
@@ -33,6 +39,10 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    // In order to kick off the initial request of the fetched results controller, we need to performFetch
+    // can pass in an NSError object varaible if you want
+    [self.fetchedResultsController performFetch:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,28 +55,29 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    // we use the section property on the fetched results controller and then count to return the number of sections
+    return self.fetchedResultsController.sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    // retrieve the section info from the fetchedResultsController and retrieve from it the number of objects from the section.
+    // Each section in our table view is represented by a sectionInfo object that conforms to the NSFetchedResults section info prootocol.
+    // we grab that specific section info object and return from it the number of objects from that section
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+    return [sectionInfo numberOfObjects];
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    JGBucketListEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    cell.textLabel.text = entry.title;
     
     return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.
@@ -129,6 +140,31 @@
     fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"title" ascending:NO]];
     
     return fetchRequest;
+}
+
+// What is a NSFetchedResultsController?
+//    class that takes a fetch request and executes it. Instead of executing it one and returning the results, it will execute it and later on let us know of any changes to the result happen. It does so through delegatioin -- like the method in this controller called: controllerDidChangeContent
+// Create a new fetchResultsController if one if we haven't created one yet
+-(NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
+    JGCoreDataStack *coreDataStack = [JGCoreDataStack defaultStack];
+    //we grab our fetch request
+    NSFetchRequest *fetchRequest = [self itemListFetchRequest];
+    
+    // we initialize the fetched results controller with the fetch request and our managed object context
+    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:coreDataStack.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    _fetchedResultsController.delegate = self;
+    return _fetchedResultsController;
+}
+
+//this is a NSFetchedResultsControllerDelegate method that will be called everytime the data in the fetch changes
+-(void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    // reload the table view data whenever the content it is displaying changes
+    [self.tableView reloadData];
 }
 
 @end
