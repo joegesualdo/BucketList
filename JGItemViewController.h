@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JGNewItemViewController : UIViewController
+@interface JGItemViewController : UIViewController
+
 - (IBAction)doneWasPressed:(UIBarButtonItem *)sender;
 - (IBAction)cancelWasPressed:(UIBarButtonItem *)sender;
 

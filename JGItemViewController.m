@@ -6,15 +6,15 @@
 //  Copyright (c) 2014 Joe Gesualdo. All rights reserved.
 //
 
-#import "JGNewItemViewController.h"
+#import "JGItemViewController.h"
 #import "JGBucketListEntry.h"
 #import "JGCoreDataStack.h"
 
-@interface JGNewItemViewController ()
+@interface JGItemViewController ()
 
 @end
 
-@implementation JGNewItemViewController
+@implementation JGItemViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

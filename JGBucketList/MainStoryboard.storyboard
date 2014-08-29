@@ -39,10 +39,10 @@
             </objects>
             <point key="canvasLocation" x="271" y="-50"/>
         </scene>
-        <!--New Item View Controller-->
+        <!--Item View Controller-->
         <scene sceneID="F2V-tW-qLX">
             <objects>
-                <viewController id="6o1-3m-KJi" customClass="JGNewItemViewController" sceneMemberID="viewController">
+                <viewController id="6o1-3m-KJi" customClass="JGItemViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Fmc-pw-wh7"/>
                         <viewControllerLayoutGuide type="bottom" id="oNj-Ce-EFA"/>
