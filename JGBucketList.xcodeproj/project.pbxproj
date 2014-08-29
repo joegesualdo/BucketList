@@ -22,6 +22,7 @@
 		E93B70B219B0C28300763CF1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93B709619B0C28300763CF1 /* CoreData.framework */; };
 		E93B70BA19B0C28300763CF1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E93B70B819B0C28300763CF1 /* InfoPlist.strings */; };
 		E93B70BC19B0C28300763CF1 /* JGBucketListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E93B70BB19B0C28300763CF1 /* JGBucketListTests.m */; };
+		E93B70C719B0C77800763CF1 /* JGCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = E93B70C619B0C77800763CF1 /* JGCoreDataStack.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		E93B70B719B0C28300763CF1 /* JGBucketListTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JGBucketListTests-Info.plist"; sourceTree = "<group>"; };
 		E93B70B919B0C28300763CF1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E93B70BB19B0C28300763CF1 /* JGBucketListTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JGBucketListTests.m; sourceTree = "<group>"; };
+		E93B70C519B0C77800763CF1 /* JGCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGCoreDataStack.h; sourceTree = "<group>"; };
+		E93B70C619B0C77800763CF1 /* JGCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGCoreDataStack.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +123,8 @@
 				E93B70A719B0C28300763CF1 /* Images.xcassets */,
 				E93B70A419B0C28300763CF1 /* JGBucketList.xcdatamodeld */,
 				E93B709919B0C28300763CF1 /* Supporting Files */,
+				E93B70C519B0C77800763CF1 /* JGCoreDataStack.h */,
+				E93B70C619B0C77800763CF1 /* JGCoreDataStack.m */,
 			);
 			path = JGBucketList;
 			sourceTree = "<group>";
@@ -251,6 +256,7 @@
 			files = (
 				E93B709F19B0C28300763CF1 /* main.m in Sources */,
 				E93B70A619B0C28300763CF1 /* JGBucketList.xcdatamodeld in Sources */,
+				E93B70C719B0C77800763CF1 /* JGCoreDataStack.m in Sources */,
 				E93B70A319B0C28300763CF1 /* JGAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
