@@ -71,6 +71,7 @@
     JGBucketListEntry *entry = [NSEntityDescription insertNewObjectForEntityForName:@"JGBucketListEntry" inManagedObjectContext:coreDataStack.managedObjectContext];
     // configure that entry
     entry.title = self.textField.text;
+    entry.isCompleted = NO;
     //save core data stack because a new entity we want to save
     [coreDataStack saveContext];
     

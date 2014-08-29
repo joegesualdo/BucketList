@@ -15,4 +15,11 @@
 @dynamic title;
 @dynamic isCompleted;
 
+
+// A computed property of our model instance that is computed everytime it is called
+-(NSString *)sectionName
+{
+    return self.isCompleted ? @"Completed" : @"Not Complete";
+}
+
 @end

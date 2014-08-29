@@ -15,4 +15,7 @@
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic) BOOL isCompleted;
 
+// A computed property of our model instance that is computed everytime it is called
+@property (nonatomic, readonly) NSString *sectionName;
+
 @end

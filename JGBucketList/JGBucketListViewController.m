@@ -142,6 +142,12 @@
     return fetchRequest;
 }
 
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+    return [sectionInfo name];
+}
+
 // What is a NSFetchedResultsController?
 //    class that takes a fetch request and executes it. Instead of executing it one and returning the results, it will execute it and later on let us know of any changes to the result happen. It does so through delegatioin -- like the method in this controller called: controllerDidChangeContent
 // Create a new fetchResultsController if one if we haven't created one yet
@@ -155,7 +161,8 @@
     NSFetchRequest *fetchRequest = [self itemListFetchRequest];
     
     // we initialize the fetched results controller with the fetch request and our managed object context
-    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:coreDataStack.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+    // We use sectionName computed property for the sectionNameKeyPath argument
+    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:coreDataStack.managedObjectContext sectionNameKeyPath:@"sectionName" cacheName:nil];
     _fetchedResultsController.delegate = self;
     return _fetchedResultsController;
 }
