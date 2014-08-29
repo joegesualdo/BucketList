@@ -7,6 +7,8 @@
 //
 
 #import "JGNewItemViewController.h"
+#import "JGBucketListEntry.h"
+#import "JGCoreDataStack.h"
 
 @interface JGNewItemViewController ()
 
@@ -48,6 +50,7 @@
 
 - (IBAction)doneWasPressed:(UIBarButtonItem *)sender {
     [self dismissSelf];
+    [self insertBucketListItem];
 }
 
 - (IBAction)cancelWasPressed:(UIBarButtonItem *)sender {
@@ -57,5 +60,19 @@
 -(void)dismissSelf
 {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+// Create a new BucketListEmtry instance and insert it into our managed object context. Then save the context.
+-(void)insertBucketListItem{
+    // Grab the applications core data stack
+    JGCoreDataStack *coreDataStack =[JGCoreDataStack defaultStack];
+    // define bucket list entry
+    // inserts a new entity into our core data stack environment
+    JGBucketListEntry *entry = [NSEntityDescription insertNewObjectForEntityForName:@"JGBucketListEntry" inManagedObjectContext:coreDataStack.managedObjectContext];
+    // configure that entry
+    entry.title = self.textField.text;
+    //save core data stack because a new entity we want to save
+    [coreDataStack saveContext];
+    
 }
 @end

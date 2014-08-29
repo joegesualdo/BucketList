@@ -148,7 +148,10 @@
 // Returns the URL to the application's Documents directory.
 - (NSURL *)applicationDocumentsDirectory
 {
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    NSURL *url = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    // This will log the Documents path after. This is good to see where the SQLLite database is located in the file system. Then you can view in a sqllite viewer
+    NSLog(@"%@", url.absoluteString);
+    return url;
 }
 
 @end

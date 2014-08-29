@@ -12,5 +12,7 @@
 - (IBAction)doneWasPressed:(UIBarButtonItem *)sender;
 - (IBAction)cancelWasPressed:(UIBarButtonItem *)sender;
 
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+
 -(void)dismissSelf;
 @end
