@@ -24,6 +24,7 @@
 		E93B70BC19B0C28300763CF1 /* JGBucketListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E93B70BB19B0C28300763CF1 /* JGBucketListTests.m */; };
 		E93B70C719B0C77800763CF1 /* JGCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = E93B70C619B0C77800763CF1 /* JGCoreDataStack.m */; };
 		E93B70CA19B0D19F00763CF1 /* JGBucketListEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = E93B70C919B0D19F00763CF1 /* JGBucketListEntry.m */; };
+		E93B70CC19B0D83000763CF1 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E93B70CB19B0D83000763CF1 /* MainStoryboard.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		E93B70C619B0C77800763CF1 /* JGCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGCoreDataStack.m; sourceTree = "<group>"; };
 		E93B70C819B0D19F00763CF1 /* JGBucketListEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGBucketListEntry.h; sourceTree = "<group>"; };
 		E93B70C919B0D19F00763CF1 /* JGBucketListEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGBucketListEntry.m; sourceTree = "<group>"; };
+		E93B70CB19B0D83000763CF1 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 				E93B70C819B0D19F00763CF1 /* JGBucketListEntry.h */,
 				E93B70C919B0D19F00763CF1 /* JGBucketListEntry.m */,
 				E93B709919B0C28300763CF1 /* Supporting Files */,
+				E93B70CB19B0D83000763CF1 /* MainStoryboard.storyboard */,
 			);
 			path = JGBucketList;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E93B70CC19B0D83000763CF1 /* MainStoryboard.storyboard in Resources */,
 				E93B709D19B0C28300763CF1 /* InfoPlist.strings in Resources */,
 				E93B70A819B0C28300763CF1 /* Images.xcassets in Resources */,
 			);
