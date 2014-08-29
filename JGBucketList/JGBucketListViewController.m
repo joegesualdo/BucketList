@@ -142,6 +142,35 @@
     return fetchRequest;
 }
 
+// Asks for the editing style for a row at a specific index
+// So this method defines what happens when you swipe the table cell
+// To make the delete work, you also need to have the delegate method: commitEditingStyle below
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Editing styles can be:
+    //     UITableViewCellEditingStyleDelete;
+    //     UITableViewCellEditingStyleNone;
+    //     UITableViewCellEditingStyleInsert;
+    
+    // we set our editing style to delete when we swipe
+    return UITableViewCellEditingStyleDelete;
+}
+
+// This method defines what happens when we click delete; refer to the other delegate method above: editingStyleForRowAtIndex
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // to delete an item, you first have to get the element you want to delete
+    JGBucketListEntry *entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    // get the core data stack
+    JGCoreDataStack *coreDataStack = [JGCoreDataStack defaultStack];
+    // to delete an object, we call the deleteObject on our managedObjectContext
+    [[coreDataStack managedObjectContext] deleteObject:entry];
+    // it's important to save the context so the changes are immediately available in the persistent store
+    // after we save the context, our fetch controller knows that our data has changed, and it calls the delegate method we defined below: controllerDidChangeContent
+    [coreDataStack saveContext];
+    
+}
+
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
@@ -149,7 +178,7 @@
 }
 
 // What is a NSFetchedResultsController?
-//    class that takes a fetch request and executes it. Instead of executing it one and returning the results, it will execute it and later on let us know of any changes to the result happen. It does so through delegatioin -- like the method in this controller called: controllerDidChangeContent
+//  class that takes a fetch request and executes it. Instead of executing it one and returning the results, it will execute it and later on let us know of any changes to the result happen. It does so through delegatioin -- like the method in this controller called: controllerDidChangeContent
 // Create a new fetchResultsController if one if we haven't created one yet
 -(NSFetchedResultsController *)fetchedResultsController
 {
