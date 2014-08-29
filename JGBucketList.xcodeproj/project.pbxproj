@@ -23,6 +23,7 @@
 		E93B70BA19B0C28300763CF1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E93B70B819B0C28300763CF1 /* InfoPlist.strings */; };
 		E93B70BC19B0C28300763CF1 /* JGBucketListTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E93B70BB19B0C28300763CF1 /* JGBucketListTests.m */; };
 		E93B70C719B0C77800763CF1 /* JGCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = E93B70C619B0C77800763CF1 /* JGCoreDataStack.m */; };
+		E93B70CA19B0D19F00763CF1 /* JGBucketListEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = E93B70C919B0D19F00763CF1 /* JGBucketListEntry.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,8 @@
 		E93B70BB19B0C28300763CF1 /* JGBucketListTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JGBucketListTests.m; sourceTree = "<group>"; };
 		E93B70C519B0C77800763CF1 /* JGCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGCoreDataStack.h; sourceTree = "<group>"; };
 		E93B70C619B0C77800763CF1 /* JGCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGCoreDataStack.m; sourceTree = "<group>"; };
+		E93B70C819B0D19F00763CF1 /* JGBucketListEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGBucketListEntry.h; sourceTree = "<group>"; };
+		E93B70C919B0D19F00763CF1 /* JGBucketListEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGBucketListEntry.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,13 +121,15 @@
 		E93B709819B0C28300763CF1 /* JGBucketList */ = {
 			isa = PBXGroup;
 			children = (
+				E93B70C519B0C77800763CF1 /* JGCoreDataStack.h */,
+				E93B70C619B0C77800763CF1 /* JGCoreDataStack.m */,
 				E93B70A119B0C28300763CF1 /* JGAppDelegate.h */,
 				E93B70A219B0C28300763CF1 /* JGAppDelegate.m */,
 				E93B70A719B0C28300763CF1 /* Images.xcassets */,
 				E93B70A419B0C28300763CF1 /* JGBucketList.xcdatamodeld */,
+				E93B70C819B0D19F00763CF1 /* JGBucketListEntry.h */,
+				E93B70C919B0D19F00763CF1 /* JGBucketListEntry.m */,
 				E93B709919B0C28300763CF1 /* Supporting Files */,
-				E93B70C519B0C77800763CF1 /* JGCoreDataStack.h */,
-				E93B70C619B0C77800763CF1 /* JGCoreDataStack.m */,
 			);
 			path = JGBucketList;
 			sourceTree = "<group>";
@@ -257,6 +262,7 @@
 				E93B709F19B0C28300763CF1 /* main.m in Sources */,
 				E93B70A619B0C28300763CF1 /* JGBucketList.xcdatamodeld in Sources */,
 				E93B70C719B0C77800763CF1 /* JGCoreDataStack.m in Sources */,
+				E93B70CA19B0D19F00763CF1 /* JGBucketListEntry.m in Sources */,
 				E93B70A319B0C28300763CF1 /* JGAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
