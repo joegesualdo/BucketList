@@ -15,8 +15,26 @@
 {
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    // before window is visible, call the setupAppearance method to design the window
+    [self setupAppearance];
+    
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+-(void)setupAppearance
+{
+    // grab the proxy object for the UINavigationBar
+    UINavigationBar *navigationBarAppearance = [UINavigationBar appearance];
+    //set the bars tint color
+    //need to have .0 so we do float division instead of integer divisioin
+    navigationBarAppearance.barTintColor = [UIColor colorWithRed:77.0/255.0 green:164.0/255.0 blue:191.0/255.0 alpha:1.0f];
+    // set the naviagtion bar tint color
+    navigationBarAppearance.tintColor = [UIColor whiteColor];
+    // set the title text attributes, the attributes applied to the title text in a navigation bar
+    // Makes sure our title text is always white.
+    navigationBarAppearance.titleTextAttributes = @{NSForegroundColorAttributeName: [UIColor whiteColor]};
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
