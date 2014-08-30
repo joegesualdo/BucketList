@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Bucket List View Controller - Root View Controller-->
+        <!--Bucket List View Controller - Bucket List-->
         <scene sceneID="C15-N0-B3M">
             <objects>
                 <tableViewController id="uQ4-Ed-vNp" customClass="JGBucketListViewController" sceneMemberID="viewController">
@@ -30,7 +30,7 @@
                             <outlet property="delegate" destination="uQ4-Ed-vNp" id="eNm-df-0Lm"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="oYM-YH-8kM">
+                    <navigationItem key="navigationItem" title="Bucket List" id="oYM-YH-8kM">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="ZFl-z9-HtJ">
                             <connections>
                                 <segue destination="gZ8-U3-D02" kind="modal" id="aNZ-pO-pnV"/>
