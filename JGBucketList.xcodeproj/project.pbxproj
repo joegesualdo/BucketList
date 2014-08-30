@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E90E4DE819B1219400C06A92 /* JGBucketListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E90E4DE719B1219400C06A92 /* JGBucketListViewController.m */; };
+		E90E4DEB19B23B1900C06A92 /* JGNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E90E4DEA19B23B1900C06A92 /* JGNavigationController.m */; };
 		E93B709119B0C28300763CF1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93B709019B0C28300763CF1 /* Foundation.framework */; };
 		E93B709319B0C28300763CF1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93B709219B0C28300763CF1 /* CoreGraphics.framework */; };
 		E93B709519B0C28300763CF1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93B709419B0C28300763CF1 /* UIKit.framework */; };
@@ -42,6 +43,8 @@
 /* Begin PBXFileReference section */
 		E90E4DE619B1219400C06A92 /* JGBucketListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGBucketListViewController.h; sourceTree = "<group>"; };
 		E90E4DE719B1219400C06A92 /* JGBucketListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGBucketListViewController.m; sourceTree = "<group>"; };
+		E90E4DE919B23B1900C06A92 /* JGNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGNavigationController.h; sourceTree = "<group>"; };
+		E90E4DEA19B23B1900C06A92 /* JGNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGNavigationController.m; sourceTree = "<group>"; };
 		E93B708D19B0C28300763CF1 /* JGBucketList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JGBucketList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E93B709019B0C28300763CF1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E93B709219B0C28300763CF1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -133,6 +136,8 @@
 				E90E4DE719B1219400C06A92 /* JGBucketListViewController.m */,
 				E93B70CD19B0D9E900763CF1 /* JGItemViewController.h */,
 				E93B70CE19B0D9E900763CF1 /* JGItemViewController.m */,
+				E90E4DE919B23B1900C06A92 /* JGNavigationController.h */,
+				E90E4DEA19B23B1900C06A92 /* JGNavigationController.m */,
 				E93B70C519B0C77800763CF1 /* JGCoreDataStack.h */,
 				E93B70C619B0C77800763CF1 /* JGCoreDataStack.m */,
 				E93B70A119B0C28300763CF1 /* JGAppDelegate.h */,
@@ -273,6 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E90E4DEB19B23B1900C06A92 /* JGNavigationController.m in Sources */,
 				E93B709F19B0C28300763CF1 /* main.m in Sources */,
 				E93B70A619B0C28300763CF1 /* JGBucketList.xcdatamodeld in Sources */,
 				E93B70C719B0C77800763CF1 /* JGCoreDataStack.m in Sources */,

@@ -86,7 +86,7 @@
         <!--Navigation Controller-->
         <scene sceneID="L1J-Pn-uT8">
             <objects>
-                <navigationController definesPresentationContext="YES" id="uts-3F-Dst" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="uts-3F-Dst" customClass="JGNavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xxi-jn-GEQ">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -101,7 +101,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Ob2-ZT-sz4">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gZ8-U3-D02" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gZ8-U3-D02" customClass="JGNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="IJK-Az-sPP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
