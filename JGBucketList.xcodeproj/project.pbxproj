@@ -129,6 +129,8 @@
 		E93B709819B0C28300763CF1 /* JGBucketList */ = {
 			isa = PBXGroup;
 			children = (
+				E90E4DE619B1219400C06A92 /* JGBucketListViewController.h */,
+				E90E4DE719B1219400C06A92 /* JGBucketListViewController.m */,
 				E93B70CD19B0D9E900763CF1 /* JGItemViewController.h */,
 				E93B70CE19B0D9E900763CF1 /* JGItemViewController.m */,
 				E93B70C519B0C77800763CF1 /* JGCoreDataStack.h */,
@@ -141,8 +143,6 @@
 				E93B70C919B0D19F00763CF1 /* JGBucketListEntry.m */,
 				E93B709919B0C28300763CF1 /* Supporting Files */,
 				E93B70CB19B0D83000763CF1 /* MainStoryboard.storyboard */,
-				E90E4DE619B1219400C06A92 /* JGBucketListViewController.h */,
-				E90E4DE719B1219400C06A92 /* JGBucketListViewController.m */,
 			);
 			path = JGBucketList;
 			sourceTree = "<group>";

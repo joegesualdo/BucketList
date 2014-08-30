@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class JGBucketListEntry;
+
 @interface JGItemViewController : UIViewController
 
 - (IBAction)doneWasPressed:(UIBarButtonItem *)sender;
 - (IBAction)cancelWasPressed:(UIBarButtonItem *)sender;
 
 @property (weak, nonatomic) IBOutlet UITextField *textField;
+
+@property(strong, nonatomic)JGBucketListEntry *entry;
 
 -(void)dismissSelf;
 @end

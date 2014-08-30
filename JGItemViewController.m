@@ -29,6 +29,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    if (self.entry != nil) {
+        self.textField.text = self.entry.title;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,8 +52,21 @@
 */
 
 - (IBAction)doneWasPressed:(UIBarButtonItem *)sender {
-    [self dismissSelf];
-    [self insertBucketListItem];
+    if (self.entry != nil) {
+        [self updateEntry];
+        [self dismissSelf];
+    } else {
+        [self dismissSelf];
+        [self insertBucketListItem];
+    }
+}
+
+-(void)updateEntry
+{
+    self.entry.title = self.textField.text;
+    
+    JGCoreDataStack *coreDataStack = [JGCoreDataStack defaultStack];
+    [coreDataStack saveContext];
 }
 
 - (IBAction)cancelWasPressed:(UIBarButtonItem *)sender {

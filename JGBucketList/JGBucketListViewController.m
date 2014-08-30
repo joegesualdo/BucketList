@@ -9,6 +9,7 @@
 #import "JGBucketListViewController.h"
 #import "JGCoreDataStack.h"
 #import "JGBucketListEntry.h"
+#import "JGItemViewController.h"
 
 @interface JGBucketListViewController () <NSFetchedResultsControllerDelegate>
 
@@ -194,6 +195,18 @@
     _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:coreDataStack.managedObjectContext sectionNameKeyPath:@"sectionName" cacheName:nil];
     _fetchedResultsController.delegate = self;
     return _fetchedResultsController;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"edit"]) {
+        UITableViewCell *cell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        UINavigationController *navigationController = segue.destinationViewController;
+        JGItemViewController *itemViewController = (JGItemViewController *)navigationController.topViewController;
+        itemViewController.entry = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        
+    }
 }
 
 #pragma mark - Animations for deleting, moving, updating, and changing rows
