@@ -15,3 +15,7 @@
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
 #endif
+
+// Make RestKit globally available
+#import <RestKit/RestKit.h>
+#import <RestKit/CoreData.h>

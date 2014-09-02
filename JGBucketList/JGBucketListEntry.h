@@ -9,13 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-
 @interface JGBucketListEntry : NSManagedObject
 
-@property (nonatomic, retain) NSString * title;
-@property (nonatomic) BOOL isCompleted;
+@property(nonatomic, retain) NSString *title;
+@property(nonatomic) BOOL isCompleted;
+@property(nonatomic, retain) NSNumber *bucketListItemId;
 
-// A computed property of our model instance that is computed everytime it is called
-@property (nonatomic, readonly) NSString *sectionName;
+// A computed property of our model instance that is computed everytime it is
+// called
+@property(nonatomic, readonly) NSString *sectionName;
 
 @end
