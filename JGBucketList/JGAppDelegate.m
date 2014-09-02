@@ -7,13 +7,18 @@
 //
 
 #import "JGAppDelegate.h"
+#import "JGBucketListEntry.h"
 
 @implementation JGAppDelegate
 
 - (BOOL)application:(UIApplication *)application
-    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   [self setupRestKit];
   [self loadComplaints];
+  return YES;
+}
+- (BOOL)application:(UIApplication *)application
+    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   // Override point for customization after application launch.
   self.window.backgroundColor = [UIColor whiteColor];
 
@@ -55,10 +60,10 @@
 
   [manager addResponseDescriptor:responseDescriptor];
 
-  NSDictionary *queryParams = @{ @"user" : @"username" };
+  //  NSDictionary *queryParams = @{ @"user" : @"username" };
 
   [manager getObjectsAtPath:@"/bucket_list_items.json"
-      parameters:queryParams
+      parameters:nil
       success:^(RKObjectRequestOperation *operation,
                 RKMappingResult *mappingResult) {
           NSArray *arout = mappingResult.array;
@@ -79,17 +84,17 @@
   manager.managedObjectStore = managedObjectStore;
 
   // define Entity mapping to core data
-  RKEntityMapping *userMapping =
+  RKEntityMapping *bucketListItemMapping =
       [RKEntityMapping mappingForEntityForName:@"JGBucketListEntry"
                           inManagedObjectStore:managedObjectStore];
-  userMapping.identificationAttributes = @[ @"bucketListItemId" ];
+  bucketListItemMapping.identificationAttributes = @[ @"bucketListItemId" ];
   NSDictionary *mappingDictionary = @{
     @"id" : @"bucketListItemId",
     @"title" : @"title",
     @"is_completed" : @"isCompleted",
   };
 
-  [userMapping addAttributeMappingsFromDictionary:mappingDictionary];
+  [bucketListItemMapping addAttributeMappingsFromDictionary:mappingDictionary];
 
   // Core Data stack initialization
   [managedObjectStore createPersistentStoreCoordinator];
@@ -116,6 +121,7 @@
       initWithManagedObjectContext:managedObjectStore
                                        .persistentStoreManagedObjectContext];
 }
+
 
 - (void)setupAppearance {
   // grab the proxy object for the UINavigationBar
