@@ -13,13 +13,14 @@
 
 - (BOOL)application:(UIApplication *)application
     willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  [self setupRestKit];
-  [self loadComplaints];
   return YES;
 }
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   // Override point for customization after application launch.
+  [self setupRestKit];
+  [self loadComplaints];
+
   self.window.backgroundColor = [UIColor whiteColor];
 
   // before window is visible, call the setupAppearance method to design the
@@ -121,7 +122,6 @@
       initWithManagedObjectContext:managedObjectStore
                                        .persistentStoreManagedObjectContext];
 }
-
 
 - (void)setupAppearance {
   // grab the proxy object for the UINavigationBar

@@ -159,7 +159,7 @@ preparation before navigation
   entry.title = self.textField.text;
   entry.isCompleted = NO;
   // save core data stack because a new entity we want to save
-  [self postBucketListItems:entry];
   [coreDataStack saveContext];
+  [self postBucketListItems:entry];
 }
 @end
