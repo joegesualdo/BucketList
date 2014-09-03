@@ -7,14 +7,15 @@
 //
 
 #import "MappingProvider.h"
+#import "JGBucketListItemManager.h"
 
 @implementation MappingProvider
 
 + (RKObjectMapping *)bucketListItemMapping;
 {
-  RKEntityMapping *itemMapping =
-      [RKEntityMapping mappingForEntityForName:@"JGBucketListEntry"
-                          inManagedObjectStore:manager.managedObjectStore];
+  RKEntityMapping *itemMapping = [RKEntityMapping
+      mappingForEntityForName:@"JGBucketListEntry"
+         inManagedObjectStore:[RKManagedObjectStore defaultStore]];
   NSDictionary *mappingDictionary = @{
     @"id" : @"bucketListItemId",
     @"title" : @"title",

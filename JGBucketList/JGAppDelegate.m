@@ -8,6 +8,7 @@
 
 #import "JGAppDelegate.h"
 #import "JGBucketListEntry.h"
+#import "JGBucketListItemManager.h"
 
 @implementation JGAppDelegate
 
@@ -17,9 +18,11 @@
 }
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  // Override point for customization after application launch.
-  [self setupRestKit];
-  [self loadComplaints];
+
+  // setup CoreData to work with restkit
+  [self setupCoreDataWithRestKit];
+
+  [[JGBucketListItemManager sharedManager] loadItems];
 
   self.window.backgroundColor = [UIColor whiteColor];
 
@@ -39,30 +42,29 @@
   RKObjectManager *manager = [RKObjectManager sharedManager];
 
   // Now for the object mappings
-  RKEntityMapping *itemMapping =
-      [RKEntityMapping mappingForEntityForName:@"JGBucketListEntry"
-                          inManagedObjectStore:manager.managedObjectStore];
-  NSDictionary *mappingDictionary = @{
-    @"id" : @"bucketListItemId",
-    @"title" : @"title",
-    @"is_completed" : @"isCompleted",
-  };
-  [itemMapping addAttributeMappingsFromDictionary:mappingDictionary];
-
-  itemMapping.identificationAttributes = @[ @"bucketListItemId" ];
-
+  //  RKEntityMapping *itemMapping =
+  //      [RKEntityMapping mappingForEntityForName:@"JGBucketListEntry"
+  //                          inManagedObjectStore:manager.managedObjectStore];
+  //  NSDictionary *mappingDictionary = @{
+  //    @"id" : @"bucketListItemId",
+  //    @"title" : @"title",
+  //    @"is_completed" : @"isCompleted",
+  //  };
+  //  [itemMapping addAttributeMappingsFromDictionary:mappingDictionary];
+  //
+  //  itemMapping.identificationAttributes = @[ @"bucketListItemId" ];
+  //
   // register mappings with the provider using a response descriptor
-  RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor
-      responseDescriptorWithMapping:itemMapping
-                             method:RKRequestMethodGET
-                        pathPattern:@"/bucket_list_items.json"
-                            keyPath:nil
-                        statusCodes:[NSIndexSet indexSetWithIndex:200]];
-
-  [manager addResponseDescriptor:responseDescriptor];
+  //  RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor
+  //      responseDescriptorWithMapping:itemMapping
+  //                             method:RKRequestMethodGET
+  //                        pathPattern:@"/bucket_list_items.json"
+  //                            keyPath:nil
+  //                        statusCodes:[NSIndexSet indexSetWithIndex:200]];
+  //
+  //  [manager addResponseDescriptor:responseDescriptor];
 
   //  NSDictionary *queryParams = @{ @"user" : @"username" };
-
   [manager getObjectsAtPath:@"/bucket_list_items.json"
       parameters:nil
       success:^(RKObjectRequestOperation *operation,
@@ -74,30 +76,30 @@
                 NSError *error) { NSLog(@"Error response': %@", error); }];
 }
 
-- (void)setupRestKit {
-  // initiate Object Manager, Model & Store
-  RKObjectManager *manager = [RKObjectManager
-      managerWithBaseURL:[NSURL URLWithString:@"http://localhost:3000"]];
+- (void)setupAppearance {
+  // grab the proxy object for the UINavigationBar
+  UINavigationBar *navigationBarAppearance = [UINavigationBar appearance];
+  // set the bars tint color
+  // need to have .0 so we do float division instead of integer divisioin
+  navigationBarAppearance.barTintColor = [UIColor colorWithRed:77.0 / 255.0
+                                                         green:164.0 / 255.0
+                                                          blue:191.0 / 255.0
+                                                         alpha:1.0f];
+  // set the naviagtion bar tint color
+  navigationBarAppearance.tintColor = [UIColor whiteColor];
+  // set the title text attributes, the attributes applied to the title text in
+  // a navigation bar
+  // Makes sure our title text is always white.
+  navigationBarAppearance.titleTextAttributes =
+      @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+}
+
+- (void)setupCoreDataWithRestKit {
   NSManagedObjectModel *managedObjectModel =
       [NSManagedObjectModel mergedModelFromBundles:nil];
   RKManagedObjectStore *managedObjectStore = [[RKManagedObjectStore alloc]
       initWithManagedObjectModel:managedObjectModel];
-  manager.managedObjectStore = managedObjectStore;
 
-  // define Entity mapping to core data
-  RKEntityMapping *bucketListItemMapping =
-      [RKEntityMapping mappingForEntityForName:@"JGBucketListEntry"
-                          inManagedObjectStore:managedObjectStore];
-  bucketListItemMapping.identificationAttributes = @[ @"bucketListItemId" ];
-  NSDictionary *mappingDictionary = @{
-    @"id" : @"bucketListItemId",
-    @"title" : @"title",
-    @"is_completed" : @"isCompleted",
-  };
-
-  [bucketListItemMapping addAttributeMappingsFromDictionary:mappingDictionary];
-
-  // Core Data stack initialization
   [managedObjectStore createPersistentStoreCoordinator];
   NSString *storePath = [RKApplicationDataDirectory()
       stringByAppendingPathComponent:@"JGBucketList.sqlite"];
@@ -121,24 +123,6 @@
   managedObjectStore.managedObjectCache = [[RKInMemoryManagedObjectCache alloc]
       initWithManagedObjectContext:managedObjectStore
                                        .persistentStoreManagedObjectContext];
-}
-
-- (void)setupAppearance {
-  // grab the proxy object for the UINavigationBar
-  UINavigationBar *navigationBarAppearance = [UINavigationBar appearance];
-  // set the bars tint color
-  // need to have .0 so we do float division instead of integer divisioin
-  navigationBarAppearance.barTintColor = [UIColor colorWithRed:77.0 / 255.0
-                                                         green:164.0 / 255.0
-                                                          blue:191.0 / 255.0
-                                                         alpha:1.0f];
-  // set the naviagtion bar tint color
-  navigationBarAppearance.tintColor = [UIColor whiteColor];
-  // set the title text attributes, the attributes applied to the title text in
-  // a navigation bar
-  // Makes sure our title text is always white.
-  navigationBarAppearance.titleTextAttributes =
-      @{NSForegroundColorAttributeName : [UIColor whiteColor]};
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
