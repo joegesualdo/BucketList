@@ -84,6 +84,7 @@
 
   JGBucketListEntry *entry =
       [self.fetchedResultsController objectAtIndexPath:indexPath];
+  NSLog(@"%@ - %@", entry.bucketListItemId, entry.title);
 
   cell.textLabel.text = entry.title;
 
@@ -160,8 +161,10 @@ preparation before navigation
   // implement a sort descriptor that sorts the items by the title
   // you can pass in more sort than one sort desciption, you just pass them in
   // as an array
-  fetchRequest.sortDescriptors =
-      @[ [NSSortDescriptor sortDescriptorWithKey:@"title" ascending:NO] ];
+  fetchRequest.sortDescriptors = @[
+    [NSSortDescriptor sortDescriptorWithKey:@"bucketListItemId"
+                                  ascending:YES]
+  ];
 
   return fetchRequest;
 }

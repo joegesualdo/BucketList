@@ -7,11 +7,14 @@
 //
 
 #import "JGObjectManager.h"
+#import "JGBucketListEntry.h"
 
 @interface JGBucketListItemManager : JGObjectManager
 
 + (instancetype)sharedManager;
 - (void)loadItems;
+- (void)postItem:(JGBucketListEntry *)item withParams:(NSDictionary *)params;
 - (void)setupResponseDescriptors;
+- (void)setupRequestDescriptors;
 
 @end

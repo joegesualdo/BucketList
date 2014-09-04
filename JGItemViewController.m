@@ -9,6 +9,7 @@
 #import "JGItemViewController.h"
 #import "JGBucketListEntry.h"
 #import "JGCoreDataStack.h"
+#import "JGBucketListItemManager.h"
 
 @interface JGItemViewController ()
 
@@ -68,72 +69,75 @@ preparation before navigation
 }
 
 - (void)postBucketListItems:(JGBucketListEntry *)item {
-  /* -- Enable this for debugging purposes
-   RKLogConfigureByName("RestKit", RKLogLevelWarning);
-   RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
-   RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
-   */
-
-  // Enable Activity Indicator Spinner
-  [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
-
-  RKObjectManager *manager = [RKObjectManager sharedManager];
-  RKObjectMapping *responseMapping =
-      [RKObjectMapping mappingForClass:[JGBucketListEntry class]];
-
-  NSDictionary *mappingDictionary = @{
-    @"bucketListItemId" : @"id",
-    @"title" : @"title",
-    @"isCompleted" : @"is_completed",
-  };
-
-  [responseMapping addAttributeMappingsFromDictionary:mappingDictionary];
-  // Set MIME Type to JSON
-  manager.requestSerializationMIMEType = RKMIMETypeJSON;
-
-  NSIndexSet *statusCodes =
-      RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful);
-  RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor
-      responseDescriptorWithMapping:responseMapping
-                             method:RKRequestMethodAny
-                        pathPattern:@"/bucket_list_items.json"
-                            keyPath:nil
-                        statusCodes:statusCodes];
-
-  // Define Mapping
-  RKObjectMapping *requestMapping = [RKObjectMapping requestMapping];
-  [requestMapping addAttributeMappingsFromDictionary:mappingDictionary];
-
-  RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor
-      requestDescriptorWithMapping:requestMapping
-                       objectClass:[JGBucketListEntry class]
-                       rootKeyPath:nil
-                            method:RKRequestMethodAny];
-
-  // Define Response Descriptor
-  [manager addResponseDescriptor:responseDescriptor];
-  [manager addRequestDescriptor:requestDescriptor];
-
-  //  // Convert Date to String Format for JSON
-  //  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-  //  [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-  //  NSString *dateString = [dateFormatter stringFromDate:complaint.createdAt];
-
+  //  /* -- Enable this for debugging purposes
+  //   RKLogConfigureByName("RestKit", RKLogLevelWarning);
+  //   RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
+  //   RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
+  //   */
+  //
+  //  // Enable Activity Indicator Spinner
+  //  [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
+  //
+  //  RKObjectManager *manager = [RKObjectManager sharedManager];
+  //  RKObjectMapping *responseMapping =
+  //      [RKObjectMapping mappingForClass:[JGBucketListEntry class]];
+  //
+  //  NSDictionary *mappingDictionary = @{
+  //    @"bucketListItemId" : @"id",
+  //    @"title" : @"title",
+  //    @"isCompleted" : @"is_completed",
+  //  };
+  //
+  //  [responseMapping addAttributeMappingsFromDictionary:mappingDictionary];
+  //  // Set MIME Type to JSON
+  //  manager.requestSerializationMIMEType = RKMIMETypeJSON;
+  //
+  //  NSIndexSet *statusCodes =
+  //      RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful);
+  //  RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor
+  //      responseDescriptorWithMapping:responseMapping
+  //                             method:RKRequestMethodAny
+  //                        pathPattern:@"/bucket_list_items.json"
+  //                            keyPath:nil
+  //                        statusCodes:statusCodes];
+  //
+  //  // Define Mapping
+  //  RKObjectMapping *requestMapping = [RKObjectMapping requestMapping];
+  //  [requestMapping addAttributeMappingsFromDictionary:mappingDictionary];
+  //
+  //  RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor
+  //      requestDescriptorWithMapping:requestMapping
+  //                       objectClass:[JGBucketListEntry class]
+  //                       rootKeyPath:nil
+  //                            method:RKRequestMethodAny];
+  //
+  //  // Define Response Descriptor
+  //  [manager addResponseDescriptor:responseDescriptor];
+  //  [manager addRequestDescriptor:requestDescriptor];
+  //
+  //  //  // Convert Date to String Format for JSON
+  //  //  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+  //  //  [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+  //  //  NSString *dateString = [dateFormatter
+  //  stringFromDate:complaint.createdAt];
+  //
   NSDictionary *params = @{
     @"title" : item.title,
     @"is_completed" : @"false",
   };
 
+  [[JGBucketListItemManager sharedManager] postItem:item withParams:params];
+
   // POST using Parameters
-  [manager postObject:item
-      path:@"/bucket_list_items.json"
-      parameters:params
-      success:^(RKObjectRequestOperation *operation,
-                RKMappingResult *mappingResult) {
-          NSLog(@"SUCCESS: %@", mappingResult.array);
-      }
-      failure:^(RKObjectRequestOperation *operation,
-                NSError *error) { NSLog(@"FAILED: %@", error); }];
+  //  [manager postObject:item
+  //      path:@"/bucket_list_items.json"
+  //      parameters:params
+  //      success:^(RKObjectRequestOperation *operation,
+  //                RKMappingResult *mappingResult) {
+  //          NSLog(@"SUCCESS: %@", mappingResult.array);
+  //      }
+  //      failure:^(RKObjectRequestOperation *operation,
+  //                NSError *error) { NSLog(@"FAILED: %@", error); }];
 }
 
 - (IBAction)cancelWasPressed:(UIBarButtonItem *)sender {
