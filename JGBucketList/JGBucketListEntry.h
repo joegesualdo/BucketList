@@ -15,6 +15,8 @@
 @property(nonatomic, retain) NSString *uuid;
 @property(nonatomic) BOOL isCompleted;
 @property(nonatomic, retain) NSNumber *bucketListItemId;
+@property(nonatomic, retain) NSString *createdAt;
+@property(nonatomic, retain) NSString *updatedAt;
 
 // A computed property of our model instance that is computed everytime it is
 // called

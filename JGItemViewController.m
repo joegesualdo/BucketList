@@ -10,6 +10,7 @@
 #import "JGBucketListEntry.h"
 #import "JGCoreDataStack.h"
 #import "JGBucketListItemManager.h"
+#import "JGDate.h"
 
 @interface JGItemViewController ()
 
@@ -70,58 +71,6 @@ preparation before navigation
 }
 
 - (void)postBucketListItems:(JGBucketListEntry *)item {
-  //  /* -- Enable this for debugging purposes
-  //   RKLogConfigureByName("RestKit", RKLogLevelWarning);
-  //   RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
-  //   RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
-  //   */
-  //
-  //  // Enable Activity Indicator Spinner
-  //  [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
-  //
-  //  RKObjectManager *manager = [RKObjectManager sharedManager];
-  //  RKObjectMapping *responseMapping =
-  //      [RKObjectMapping mappingForClass:[JGBucketListEntry class]];
-  //
-  //  NSDictionary *mappingDictionary = @{
-  //    @"bucketListItemId" : @"id",
-  //    @"title" : @"title",
-  //    @"isCompleted" : @"is_completed",
-  //  };
-  //
-  //  [responseMapping addAttributeMappingsFromDictionary:mappingDictionary];
-  //  // Set MIME Type to JSON
-  //  manager.requestSerializationMIMEType = RKMIMETypeJSON;
-  //
-  //  NSIndexSet *statusCodes =
-  //      RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful);
-  //  RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor
-  //      responseDescriptorWithMapping:responseMapping
-  //                             method:RKRequestMethodAny
-  //                        pathPattern:@"/bucket_list_items.json"
-  //                            keyPath:nil
-  //                        statusCodes:statusCodes];
-  //
-  //  // Define Mapping
-  //  RKObjectMapping *requestMapping = [RKObjectMapping requestMapping];
-  //  [requestMapping addAttributeMappingsFromDictionary:mappingDictionary];
-  //
-  //  RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor
-  //      requestDescriptorWithMapping:requestMapping
-  //                       objectClass:[JGBucketListEntry class]
-  //                       rootKeyPath:nil
-  //                            method:RKRequestMethodAny];
-  //
-  //  // Define Response Descriptor
-  //  [manager addResponseDescriptor:responseDescriptor];
-  //  [manager addRequestDescriptor:requestDescriptor];
-  //
-  //  //  // Convert Date to String Format for JSON
-  //  //  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-  //  //  [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-  //  //  NSString *dateString = [dateFormatter
-  //  stringFromDate:complaint.createdAt];
-  //
   NSDictionary *params = @{
     @"title" : item.title,
     @"uuid" : item.uuid,
@@ -129,17 +78,6 @@ preparation before navigation
   };
 
   [[JGBucketListItemManager sharedManager] postItem:item withParams:params];
-
-  // POST using Parameters
-  //  [manager postObject:item
-  //      path:@"/bucket_list_items.json"
-  //      parameters:params
-  //      success:^(RKObjectRequestOperation *operation,
-  //                RKMappingResult *mappingResult) {
-  //          NSLog(@"SUCCESS: %@", mappingResult.array);
-  //      }
-  //      failure:^(RKObjectRequestOperation *operation,
-  //                NSError *error) { NSLog(@"FAILED: %@", error); }];
 }
 
 - (IBAction)cancelWasPressed:(UIBarButtonItem *)sender {
@@ -158,9 +96,12 @@ preparation before navigation
   JGCoreDataStack *coreDataStack = [JGCoreDataStack defaultStack];
   // define bucket list entry
   // inserts a new entity into our core data stack environment
-  JGBucketListEntry *entry = [NSEntityDescription
-      insertNewObjectForEntityForName:@"JGBucketListEntry"
-               inManagedObjectContext:coreDataStack.managedObjectContext];
+//  JGBucketListEntry *entry = [NSEntityDescription
+//      insertNewObjectForEntityForName:@"JGBucketListEntry"
+//               inManagedObjectContext:coreDataStack.managedObjectContext];
+  [coreDataStack saveContext];
+  NSManagedObjectContext *managedObjCtx = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
+  JGBucketListEntry *entry = [managedObjCtx insertNewObjectForEntityForName:@"JGBucketListEntry"];
   // configure that entry
   // This creates a uique number that will be appied to each etry
   NSString *uuid = [[NSUUID UUID] UUIDString];
@@ -169,9 +110,15 @@ preparation before navigation
   NSLog(@"The entry has uuid -- %@", entry.uuid);
   entry.title = self.textField.text;
   entry.isCompleted = NO;
+  entry.createdAt = [JGDate timestampUTC];
+  entry.updatedAt = [JGDate timestampUTC];
 
   // save core data stack because a new entity we want to save
-  [coreDataStack saveContext];
+//  [coreDataStack saveContext];
+  NSError *executeError = nil;
+  if([managedObjCtx saveToPersistentStore:&executeError]) {
+    NSLog(@"Failed to save to data store");
+  }
   [self postBucketListItems:entry];
 }
 @end

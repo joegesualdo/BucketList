@@ -6,6 +6,16 @@
 //  Copyright (c) 2014 Joe Gesualdo. All rights reserved.
 //
 
+// How to get our CoreData context using restkit?
+// NSManagedObjectContext *context =[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext
+
+// How to insert a new item into our context?
+// JGBucketListEntry *entry = [context insertNewObjectForEntityForName:@"JGBucketListEntry"];
+
+// How to save a cotext after we add something to it?
+// [context saveToPersistentStore:&error];
+
+
 #import "JGObjectManager.h"
 #import "MappingProvider.h"
 

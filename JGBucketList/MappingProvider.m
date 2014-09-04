@@ -22,6 +22,8 @@
     @"id" : @"bucketListItemId",
     @"title" : @"title",
     @"is_completed" : @"isCompleted",
+    @"create_at" : @"createdAt",
+    @"updated_at" : @"updatedAt",
   };
 
   itemMapping.identificationAttributes = @[ @"uuid" ];

@@ -99,9 +99,8 @@ static JGBucketListItemManager *sharedManager = nil;
   NSMutableArray *requestDescriptorsArray = [@[] mutableCopy];
 
   // Request Descriptor for an item
-  RKRequestDescriptor *itemRequestDescriptor = [RKRequestDescriptor
-      requestDescriptorWithMapping:
-          [[MappingProvider bucketListItemMapping] inverseMapping]
+  RKRequestDescriptor *itemRequestDescriptor =
+  [RKRequestDescriptor requestDescriptorWithMapping:[[MappingProvider bucketListItemMapping] inverseMapping]
                        objectClass:[JGBucketListEntry class]
                        rootKeyPath:nil
                             method:RKRequestMethodAny];

@@ -9,72 +9,28 @@
 #import "JGAppDelegate.h"
 #import "JGBucketListEntry.h"
 #import "JGBucketListItemManager.h"
+#import "JGManagedObjectStore.h"
 
 @implementation JGAppDelegate
 
 - (BOOL)application:(UIApplication *)application
-    willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  return YES;
-}
-- (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
   // setup CoreData to work with restkit
-  [self setupCoreDataWithRestKit];
+  [JGManagedObjectStore setupCoreDataWithRestKit];
 
+  // GET items from backend
   [[JGBucketListItemManager sharedManager] loadItems];
 
   self.window.backgroundColor = [UIColor whiteColor];
-
   // before window is visible, call the setupAppearance method to design the
   // window
   [self setupAppearance];
-
   [self.window makeKeyAndVisible];
 
   return YES;
 }
 
-//- (void)loadComplaints {
-// Enable Activity Indicator Spinner
-//  [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
-//
-//  RKObjectManager *manager = [RKObjectManager sharedManager];
-
-// Now for the object mappings
-//  RKEntityMapping *itemMapping =
-//      [RKEntityMapping mappingForEntityForName:@"JGBucketListEntry"
-//                          inManagedObjectStore:manager.managedObjectStore];
-//  NSDictionary *mappingDictionary = @{
-//    @"id" : @"bucketListItemId",
-//    @"title" : @"title",
-//    @"is_completed" : @"isCompleted",
-//  };
-//  [itemMapping addAttributeMappingsFromDictionary:mappingDictionary];
-//
-//  itemMapping.identificationAttributes = @[ @"bucketListItemId" ];
-//
-// register mappings with the provider using a response descriptor
-//  RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor
-//      responseDescriptorWithMapping:itemMapping
-//                             method:RKRequestMethodGET
-//                        pathPattern:@"/bucket_list_items.json"
-//                            keyPath:nil
-//                        statusCodes:[NSIndexSet indexSetWithIndex:200]];
-//
-//  [manager addResponseDescriptor:responseDescriptor];
-
-//  NSDictionary *queryParams = @{ @"user" : @"username" };
-//  [manager getObjectsAtPath:@"/bucket_list_items.json"
-//      parameters:nil
-//      success:^(RKObjectRequestOperation *operation,
-//                RKMappingResult *mappingResult) {
-//          NSArray *arout = mappingResult.array;
-//          NSLog(@"items: %@", arout);
-//      }
-//      failure:^(RKObjectRequestOperation *operation,
-//                NSError *error) { NSLog(@"Error response': %@", error); }];
-//}
 
 - (void)setupAppearance {
   // grab the proxy object for the UINavigationBar
@@ -93,40 +49,6 @@
   // Makes sure our title text is always white.
   navigationBarAppearance.titleTextAttributes =
       @{NSForegroundColorAttributeName : [UIColor whiteColor]};
-}
-
-- (void)setupCoreDataWithRestKit {
-  NSManagedObjectModel *managedObjectModel =
-      [NSManagedObjectModel mergedModelFromBundles:nil];
-  RKManagedObjectStore *managedObjectStore = [[RKManagedObjectStore alloc]
-      initWithManagedObjectModel:managedObjectModel];
-
-  [managedObjectStore createPersistentStoreCoordinator];
-  NSString *storePath = [RKApplicationDataDirectory()
-      stringByAppendingPathComponent:@"JGBucketList.sqlite"];
-  NSError *error;
-  NSPersistentStore *persistentStore = [managedObjectStore
-      addSQLitePersistentStoreAtPath:storePath
-              fromSeedDatabaseAtPath:nil
-                   withConfiguration:nil
-                             options:@{
-                               NSMigratePersistentStoresAutomaticallyOption :
-                                   @YES,
-                               NSInferMappingModelAutomaticallyOption : @YES
-                             } error:&error];
-  NSAssert(persistentStore, @"Failed to add persistent store with error: %@",
-           error);
-
-  // Create the managed object contexts
-  [managedObjectStore createManagedObjectContexts];
-
-  // Configure a managed object cache to ensure we do not create duplicate
-  // objects
-  // Uncommenting because it isn't workng
-  //  managedObjectStore.managedObjectCache = [[RKInMemoryManagedObjectCache
-  //  alloc]
-  //      initWithManagedObjectContext:managedObjectStore
-  //                                       .persistentStoreManagedObjectContext];
 }
 
 - (void)
@@ -179,6 +101,4 @@
   // application terminates.
 }
 
-// this method is responsible for saving the contents of our in memory store to
-// the persistent store sqllite database on disk
 @end

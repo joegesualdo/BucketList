@@ -15,6 +15,8 @@
 @dynamic isCompleted;
 @dynamic bucketListItemId;
 @dynamic uuid;
+@dynamic createdAt;
+@dynamic updatedAt;
 
 // A computed property of our model instance that is computed everytime it is
 // called

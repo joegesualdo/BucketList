@@ -37,6 +37,10 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  
+  
+  
+
 
   // Uncomment the following line to preserve selection between presentations.
   // self.clearsSelectionOnViewWillAppear = NO;
@@ -72,6 +76,8 @@
   // conforms to the NSFetchedResults section info prootocol.
   // we grab that specific section info object and return from it the number of
   // objects from that section
+  
+
   id<NSFetchedResultsSectionInfo> sectionInfo =
       [self.fetchedResultsController sections][section];
   return [sectionInfo numberOfObjects];
@@ -163,7 +169,7 @@ preparation before navigation
   // you can pass in more sort than one sort desciption, you just pass them in
   // as an array
   fetchRequest.sortDescriptors = @[
-    [NSSortDescriptor sortDescriptorWithKey:@"bucketListItemId"
+    [NSSortDescriptor sortDescriptorWithKey:@"updatedAt"
                                   ascending:YES]
   ];
 
@@ -222,7 +228,8 @@ preparation before navigation
   if (_fetchedResultsController != nil) {
     return _fetchedResultsController;
   }
-  JGCoreDataStack *coreDataStack = [JGCoreDataStack defaultStack];
+//  NSManagedObjectContext *managedObjCtx = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
+//  JGCoreDataStack *coreDataStack = [JGCoreDataStack defaultStack];
   // we grab our fetch request
   NSFetchRequest *fetchRequest = [self itemListFetchRequest];
 
@@ -231,7 +238,7 @@ preparation before navigation
   // We use sectionName computed property for the sectionNameKeyPath argument
   _fetchedResultsController = [[NSFetchedResultsController alloc]
       initWithFetchRequest:fetchRequest
-      managedObjectContext:coreDataStack.managedObjectContext
+      managedObjectContext:[RKManagedObjectStore defaultStore].mainQueueManagedObjectContext
         sectionNameKeyPath:@"isCompleted"
                  cacheName:nil];
   _fetchedResultsController.delegate = self;
@@ -265,6 +272,7 @@ preparation before navigation
 //    3) controllerDidChnageSEction
 //    4) controllerDidChangeContent
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+  
   [self.tableView beginUpdates];
 }
 
@@ -280,22 +288,34 @@ preparation before navigation
   // insertRowAtIndexPath method will be called on the table view. This will
   // insert a new row at the specified indexPath. This will do it with animation
   // automatic
-  case NSFetchedResultsChangeInsert:
-    // You can choose many types of animations
-    [self.tableView insertRowsAtIndexPaths:@[ newIndexPath ]
-                          withRowAnimation:UITableViewRowAnimationAutomatic];
-    break;
-  // we pass indexPath and not newIndexPath
-  case NSFetchedResultsChangeDelete:
-    [self.tableView deleteRowsAtIndexPaths:@[ indexPath ]
-                          withRowAnimation:UITableViewRowAnimationAutomatic];
-    break;
-  case NSFetchedResultsChangeUpdate:
-    [self.tableView reloadRowsAtIndexPaths:@[ indexPath ]
-                          withRowAnimation:UITableViewRowAnimationAutomatic];
-    break;
-  default:
-    break;
+    case NSFetchedResultsChangeInsert:
+      [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+      break;
+      
+    case NSFetchedResultsChangeDelete:
+      if ([[self.fetchedResultsController fetchedObjects] count] == 0) {
+        // Last object removed, "object cell" is replaced by "empty cell"
+        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+      } else {
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+      }
+      break;
+//  case NSFetchedResultsChangeInsert:
+//    // You can choose many types of animations
+//    [self.tableView insertRowsAtIndexPaths:@[ newIndexPath ]
+//                          withRowAnimation:UITableViewRowAnimationAutomatic];
+//    break;
+//  // we pass indexPath and not newIndexPath
+//  case NSFetchedResultsChangeDelete:
+//    [self.tableView deleteRowsAtIndexPaths:@[ indexPath ]
+//                          withRowAnimation:UITableViewRowAnimationAutomatic];
+//    break;
+//  case NSFetchedResultsChangeUpdate:
+//    [self.tableView reloadRowsAtIndexPaths:@[ indexPath ]
+//                          withRowAnimation:UITableViewRowAnimationAutomatic];
+//    break;
+//  default:
+//    break;
   }
 }
 
