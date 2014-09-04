@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface JGDate : NSObject
+@interface JGAttributeHelper : NSObject
 
 +(NSString *)timestampUTC;
++(NSString *)uuid;
 
 @end

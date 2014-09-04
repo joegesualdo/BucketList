@@ -33,7 +33,7 @@
 		E94E14BE19B7AD27004B01E5 /* JGObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E94E14BD19B7AD27004B01E5 /* JGObjectManager.m */; };
 		E94E14C119B7AF9F004B01E5 /* JGBucketListItemManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E94E14C019B7AF9F004B01E5 /* JGBucketListItemManager.m */; };
 		E94E14C419B8A43A004B01E5 /* JGManagedObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E94E14C319B8A43A004B01E5 /* JGManagedObjectStore.m */; };
-		E94E14C719B8C725004B01E5 /* JGDate.m in Sources */ = {isa = PBXBuildFile; fileRef = E94E14C619B8C725004B01E5 /* JGDate.m */; };
+		E94E14C719B8C725004B01E5 /* JGAttributeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E94E14C619B8C725004B01E5 /* JGAttributeHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,8 +86,8 @@
 		E94E14C019B7AF9F004B01E5 /* JGBucketListItemManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGBucketListItemManager.m; sourceTree = "<group>"; };
 		E94E14C219B8A43A004B01E5 /* JGManagedObjectStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGManagedObjectStore.h; sourceTree = "<group>"; };
 		E94E14C319B8A43A004B01E5 /* JGManagedObjectStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGManagedObjectStore.m; sourceTree = "<group>"; };
-		E94E14C519B8C725004B01E5 /* JGDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGDate.h; sourceTree = "<group>"; };
-		E94E14C619B8C725004B01E5 /* JGDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGDate.m; sourceTree = "<group>"; };
+		E94E14C519B8C725004B01E5 /* JGAttributeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGAttributeHelper.h; sourceTree = "<group>"; };
+		E94E14C619B8C725004B01E5 /* JGAttributeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGAttributeHelper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,8 +273,8 @@
 				E94E14B819B7ABB5004B01E5 /* RestKit */,
 				E93B70C519B0C77800763CF1 /* JGCoreDataStack.h */,
 				E93B70C619B0C77800763CF1 /* JGCoreDataStack.m */,
-				E94E14C519B8C725004B01E5 /* JGDate.h */,
-				E94E14C619B8C725004B01E5 /* JGDate.m */,
+				E94E14C519B8C725004B01E5 /* JGAttributeHelper.h */,
+				E94E14C619B8C725004B01E5 /* JGAttributeHelper.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -474,7 +474,7 @@
 			files = (
 				E90E4DEB19B23B1900C06A92 /* JGNavigationController.m in Sources */,
 				E93B709F19B0C28300763CF1 /* main.m in Sources */,
-				E94E14C719B8C725004B01E5 /* JGDate.m in Sources */,
+				E94E14C719B8C725004B01E5 /* JGAttributeHelper.m in Sources */,
 				E93B70A619B0C28300763CF1 /* JGBucketList.xcdatamodeld in Sources */,
 				E94E14BB19B7ABE4004B01E5 /* MappingProvider.m in Sources */,
 				E93B70C719B0C77800763CF1 /* JGCoreDataStack.m in Sources */,

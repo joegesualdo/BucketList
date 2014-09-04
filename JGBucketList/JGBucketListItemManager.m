@@ -48,6 +48,23 @@ static JGBucketListItemManager *sharedManager = nil;
                 NSError *error) { NSLog(@"FAILED: %@", error); }];
 }
 
+-(void)destroyItem:(JGBucketListEntry *)item withParams:(NSDictionary *)params
+{
+  [sharedManager deleteObject:item
+                         path:[NSString stringWithFormat:@"/bucket_list_items/%@", item.bucketListItemId]
+                   parameters:nil
+                      success:nil
+                      failure:nil];
+}
+
+-(void)patchItem:(JGBucketListEntry *)item withParams:(NSDictionary *)params
+{
+  [sharedManager patchObject:item
+                         path:[NSString stringWithFormat:@"/bucket_list_items/%@", item.bucketListItemId]
+                   parameters:nil
+                      success:nil
+                      failure:nil];
+}
 // ============================================
 #pragma mark - Response Descriptors 
 // ============================================

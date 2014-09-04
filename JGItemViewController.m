@@ -10,7 +10,7 @@
 #import "JGBucketListEntry.h"
 #import "JGCoreDataStack.h"
 #import "JGBucketListItemManager.h"
-#import "JGDate.h"
+#import "JGAttributeHelper.h"
 
 @interface JGItemViewController ()
 
@@ -66,18 +66,9 @@ preparation before navigation
 - (void)updateEntry {
   self.entry.title = self.textField.text;
 
-  JGCoreDataStack *coreDataStack = [JGCoreDataStack defaultStack];
-  [coreDataStack saveContext];
-}
-
-- (void)postBucketListItems:(JGBucketListEntry *)item {
-  NSDictionary *params = @{
-    @"title" : item.title,
-    @"uuid" : item.uuid,
-    @"is_completed" : @"false",
-  };
-
-  [[JGBucketListItemManager sharedManager] postItem:item withParams:params];
+//  JGCoreDataStack *coreDataStack = [JGCoreDataStack defaultStack];
+//  [coreDataStack saveContext];
+  [[JGBucketListItemManager sharedManager]patchItem:self.entry withParams:nil];
 }
 
 - (IBAction)cancelWasPressed:(UIBarButtonItem *)sender {
@@ -104,21 +95,17 @@ preparation before navigation
   JGBucketListEntry *entry = [managedObjCtx insertNewObjectForEntityForName:@"JGBucketListEntry"];
   // configure that entry
   // This creates a uique number that will be appied to each etry
-  NSString *uuid = [[NSUUID UUID] UUIDString];
-  entry.uuid = uuid;
-  NSLog(@"The uuid -- %@", uuid);
-  NSLog(@"The entry has uuid -- %@", entry.uuid);
+  entry.uuid = [JGAttributeHelper uuid];
   entry.title = self.textField.text;
   entry.isCompleted = NO;
-  entry.createdAt = [JGDate timestampUTC];
-  entry.updatedAt = [JGDate timestampUTC];
-
-  // save core data stack because a new entity we want to save
-//  [coreDataStack saveContext];
-  NSError *executeError = nil;
-  if([managedObjCtx saveToPersistentStore:&executeError]) {
-    NSLog(@"Failed to save to data store");
-  }
-  [self postBucketListItems:entry];
+  entry.createdAt = [JGAttributeHelper timestampUTC];
+  entry.updatedAt = [JGAttributeHelper timestampUTC];
+  
+  // It appears I don't need to persist the entity. Instead I can just post it
+//  NSError *executeError = nil;
+//  if([managedObjCtx saveToPersistentStore:&executeError]) {
+//    NSLog(@"Failed to save to data store");
+//  }
+  [[JGBucketListItemManager sharedManager] postItem:entry withParams:nil];
 }
 @end

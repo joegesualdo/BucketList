@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Joe Gesualdo. All rights reserved.
 //
 
-#import "JGDate.h"
+#import "JGAttributeHelper.h"
 
-@implementation JGDate
+@implementation JGAttributeHelper
 
 +(NSString *)timestampUTC
 {
@@ -22,5 +22,11 @@
   NSString *localDateString = [dateFormatter stringFromDate:currentDate];
   
   return localDateString;
+}
+
++(NSString *)uuid
+{
+  NSString *uuid = [[NSUUID UUID] UUIDString];
+  return uuid;
 }
 @end

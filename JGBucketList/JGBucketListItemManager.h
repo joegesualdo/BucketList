@@ -14,6 +14,8 @@
 + (instancetype)sharedManager;
 - (void)loadItems;
 - (void)postItem:(JGBucketListEntry *)item withParams:(NSDictionary *)params;
+- (void)patchItem:(JGBucketListEntry *)item withParams:(NSDictionary *)params;
+-(void)destroyItem:(JGBucketListEntry *)item withParams:(NSDictionary *)params;
 - (void)setupResponseDescriptors;
 - (void)setupRequestDescriptors;
 

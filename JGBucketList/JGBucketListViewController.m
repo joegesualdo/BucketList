@@ -200,15 +200,34 @@ preparation before navigation
   JGBucketListEntry *entry =
       [self.fetchedResultsController objectAtIndexPath:indexPath];
   // get the core data stack
-  JGCoreDataStack *coreDataStack = [JGCoreDataStack defaultStack];
-  // to delete an object, we call the deleteObject on our managedObjectContext
-  [[coreDataStack managedObjectContext] deleteObject:entry];
+//  JGCoreDataStack *coreDataStack = [JGCoreDataStack defaultStack];
+//  // to delete an object, we call the deleteObject on our managedObjectContext
+//  RKManagedObjectStore *store = [RKManagedObjectStore defaultStore];
+//  NSManagedObjectContext *managedObjectContext = entry.managedObjectContext;
+//  
+//  [managedObjectContext deleteObject:entry];
+//  
+//  NSError *error;
+//  if (![managedObjectContext save:&error]) {
+//    
+//    NSLog(@"delete error");
+//    
+//    // Handle the error, update UI etc.
+//   
+//  }
+  
+  [[JGBucketListItemManager sharedManager] destroyItem:entry withParams:nil];
   // it's important to save the context so the changes are immediately available
   // in the persistent store
   // after we save the context, our fetch controller knows that our data has
   // changed, and it calls the delegate method we defined below:
   // controllerDidChangeContent
-  [coreDataStack saveContext];
+//  [coreDataStack saveContext];
+//NSError *executeError = nil;
+//if(![managedObjectContext saveToPersistentStore:&executeError]) {
+//  NSLog(@"Failed to save to data store -- %@", [executeError localizedDescription]);
+//}
+  
 }
 
 - (NSString *)tableView:(UITableView *)tableView
@@ -288,31 +307,31 @@ preparation before navigation
   // insertRowAtIndexPath method will be called on the table view. This will
   // insert a new row at the specified indexPath. This will do it with animation
   // automatic
-    case NSFetchedResultsChangeInsert:
-      [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-      break;
-      
-    case NSFetchedResultsChangeDelete:
-      if ([[self.fetchedResultsController fetchedObjects] count] == 0) {
-        // Last object removed, "object cell" is replaced by "empty cell"
-        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-      } else {
-        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-      }
-      break;
-//  case NSFetchedResultsChangeInsert:
-//    // You can choose many types of animations
-//    [self.tableView insertRowsAtIndexPaths:@[ newIndexPath ]
-//                          withRowAnimation:UITableViewRowAnimationAutomatic];
-//    break;
-//  // we pass indexPath and not newIndexPath
-//  case NSFetchedResultsChangeDelete:
-//    [self.tableView deleteRowsAtIndexPaths:@[ indexPath ]
-//                          withRowAnimation:UITableViewRowAnimationAutomatic];
-//    break;
-//  case NSFetchedResultsChangeUpdate:
-//    [self.tableView reloadRowsAtIndexPaths:@[ indexPath ]
-//                          withRowAnimation:UITableViewRowAnimationAutomatic];
+//    case NSFetchedResultsChangeInsert:
+//      [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+//      break;
+//      
+//    case NSFetchedResultsChangeDelete:
+//      if ([[self.fetchedResultsController fetchedObjects] count] == 0) {
+//        // Last object removed, "object cell" is replaced by "empty cell"
+//        [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//      } else {
+//        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//      }
+//      break;
+  case NSFetchedResultsChangeInsert:
+    // You can choose many types of animations
+    [self.tableView insertRowsAtIndexPaths:@[ newIndexPath ]
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
+    break;
+  // we pass indexPath and not newIndexPath
+  case NSFetchedResultsChangeDelete:
+    [self.tableView deleteRowsAtIndexPaths:@[ indexPath ]
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
+    break;
+  case NSFetchedResultsChangeUpdate:
+    [self.tableView reloadRowsAtIndexPaths:@[ indexPath ]
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
 //    break;
 //  default:
 //    break;
