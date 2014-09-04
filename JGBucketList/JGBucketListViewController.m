@@ -10,6 +10,7 @@
 #import "JGCoreDataStack.h"
 #import "JGBucketListEntry.h"
 #import "JGItemViewController.h"
+#import "JGBucketListItemManager.h"
 
 @interface JGBucketListViewController () <NSFetchedResultsControllerDelegate>
 

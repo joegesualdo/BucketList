@@ -12,12 +12,13 @@
 @implementation JGObjectManager
 
 + (instancetype)sharedManager {
+
   // Enable Activity Indicator Spinner
   [AFNetworkActivityIndicatorManager sharedManager].enabled = YES;
 
   NSURL *url = [NSURL URLWithString:@"http://localhost:3000"];
-
   JGObjectManager *sharedManager = [self managerWithBaseURL:url];
+
   sharedManager.requestSerializationMIMEType = RKMIMETypeJSON;
   sharedManager.managedObjectStore = [RKManagedObjectStore defaultStore];
   /*

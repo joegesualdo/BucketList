@@ -10,13 +10,16 @@
 #import "MappingProvider.h"
 #import "JGBucketListEntry.h"
 
+// creates a static variable for sharedManager, which means it will only be created once
 static JGBucketListItemManager *sharedManager = nil;
 
 @implementation JGBucketListItemManager
 
 + (instancetype)sharedManager {
   static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{ sharedManager = [super sharedManager]; });
+  dispatch_once(&onceToken, ^{
+    sharedManager = [super sharedManager];
+  });
 
   return sharedManager;
 }
@@ -24,14 +27,15 @@ static JGBucketListItemManager *sharedManager = nil;
 - (void)loadItems {
   [self getObjectsAtPath:@"/bucket_list_items"
       parameters:nil
-      success:^(RKObjectRequestOperation *operation,
-                RKMappingResult *mappingResult) {
-          NSArray *arout = mappingResult.array;
-          NSLog(@"items: %@", arout);
+      success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        NSArray *arout = mappingResult.array;
+        NSLog(@"items: %@", arout);
       }
-      failure:^(RKObjectRequestOperation *operation,
-                NSError *error) { NSLog(@"Error response': %@", error); }];
+      failure:^(RKObjectRequestOperation *operation, NSError *error){
+        NSLog(@"Error response': %@", error);
+      }];
 }
+
 - (void)postItem:(JGBucketListEntry *)item withParams:(NSDictionary *)params {
   [sharedManager postObject:item
       path:@"/bucket_list_items"
@@ -43,57 +47,68 @@ static JGBucketListItemManager *sharedManager = nil;
       failure:^(RKObjectRequestOperation *operation,
                 NSError *error) { NSLog(@"FAILED: %@", error); }];
 }
-- (void)setupResponseDescriptors {
-  [super setupResponseDescriptors];
 
-  NSIndexSet *statusCodes =
+// ============================================
+#pragma mark - Response Descriptors 
+// ============================================
+
+- (void)setupResponseDescriptors {
+  // call setupResponseDescriptors from JGObjectManager
+  [super setupResponseDescriptors];
+  
+  // initialize an array where we will store all oru response descriptors
+  NSMutableArray *responseDescriptorsArray = [@[] mutableCopy];
+
+  NSIndexSet *successfulStatusCodes =
       RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful);
 
-  RKResponseDescriptor *responseDescriptor1 = [RKResponseDescriptor
+  // Response Descriptor for all items
+  RKResponseDescriptor *itemsResponseDescriptor = [RKResponseDescriptor
       responseDescriptorWithMapping:[MappingProvider bucketListItemMapping]
                              method:RKRequestMethodGET
                         pathPattern:@"/bucket_list_items"
                             keyPath:nil
-                        statusCodes:statusCodes];
+                        statusCodes:successfulStatusCodes];
+  // Add response descriptor to array
+  [responseDescriptorsArray addObject:itemsResponseDescriptor];
 
-  [self addResponseDescriptor:responseDescriptor1];
-
-  RKResponseDescriptor *responseDescriptor2 = [RKResponseDescriptor
+  // Response Descriptor for a single items
+  RKResponseDescriptor *itemResponseDescriptor = [RKResponseDescriptor
       responseDescriptorWithMapping:[MappingProvider bucketListItemMapping]
                              method:RKRequestMethodAny
                         pathPattern:@"/bucket_list_items/:bucketListItemId"
                             keyPath:nil
-                        statusCodes:[NSIndexSet indexSetWithIndex:201]];
-  [self addResponseDescriptor:responseDescriptor2];
+                        statusCodes:successfulStatusCodes];
+  // Add response descriptor to array
+  [responseDescriptorsArray addObject:itemResponseDescriptor];
+  
+  // Register all our response descriptors
+  [self addResponseDescriptorsFromArray: responseDescriptorsArray];
 
-  RKResponseDescriptor *responseDescriptor3 = [RKResponseDescriptor
-      responseDescriptorWithMapping:[MappingProvider bucketListItemMapping]
-                             method:RKRequestMethodAny
-                        pathPattern:@"/bucket_list_items/:bucketListItemId"
-                            keyPath:nil
-                        statusCodes:[NSIndexSet indexSetWithIndex:200]];
-  [self addResponseDescriptor:responseDescriptor3];
 }
+
+// ============================================
+#pragma mark - Request Descriptors
+// ============================================
+
 - (void)setupRequestDescriptors {
+  // call setupRequestDescriptors from JGObjectManager
   [super setupRequestDescriptors];
 
-  //  NSIndexSet *statusCodes =
-  //      RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful);
-  //  RKResponseDescriptor *responseDescriptor = [RKResponseDescriptor
-  //      responseDescriptorWithMapping:
-  //          [[MappingProvider bucketListItemMapping] inverseMapping]
-  //                             method:RKRequestMethodAny
-  //                        pathPattern:@"/bucket_list_items.json"
-  //                            keyPath:nil
-  //                        statusCodes:statusCodes];
+  // initialize an array where we will store all oru request descriptors
+  NSMutableArray *requestDescriptorsArray = [@[] mutableCopy];
 
-  RKRequestDescriptor *requestDescriptor = [RKRequestDescriptor
+  // Request Descriptor for an item
+  RKRequestDescriptor *itemRequestDescriptor = [RKRequestDescriptor
       requestDescriptorWithMapping:
           [[MappingProvider bucketListItemMapping] inverseMapping]
                        objectClass:[JGBucketListEntry class]
                        rootKeyPath:nil
                             method:RKRequestMethodAny];
+  // Add request descriptor to array
+  [requestDescriptorsArray addObject:itemRequestDescriptor];
 
-  [self addRequestDescriptor:requestDescriptor];
+  // Register all our requests descriptors
+  [self addRequestDescriptorsFromArray:requestDescriptorsArray];
 }
 @end

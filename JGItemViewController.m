@@ -28,6 +28,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+    
   // Do any additional setup after loading the view.
   if (self.entry != nil) {
     self.textField.text = self.entry.title;
@@ -123,6 +124,7 @@ preparation before navigation
   //
   NSDictionary *params = @{
     @"title" : item.title,
+    @"uuid" : item.uuid,
     @"is_completed" : @"false",
   };
 
@@ -160,8 +162,14 @@ preparation before navigation
       insertNewObjectForEntityForName:@"JGBucketListEntry"
                inManagedObjectContext:coreDataStack.managedObjectContext];
   // configure that entry
+  // This creates a uique number that will be appied to each etry
+  NSString *uuid = [[NSUUID UUID] UUIDString];
+  entry.uuid = uuid;
+  NSLog(@"The uuid -- %@", uuid);
+  NSLog(@"The entry has uuid -- %@", entry.uuid);
   entry.title = self.textField.text;
   entry.isCompleted = NO;
+
   // save core data stack because a new entity we want to save
   [coreDataStack saveContext];
   [self postBucketListItems:entry];

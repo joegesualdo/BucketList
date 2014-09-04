@@ -12,6 +12,7 @@
 @interface JGBucketListEntry : NSManagedObject
 
 @property(nonatomic, retain) NSString *title;
+@property(nonatomic, retain) NSString *uuid;
 @property(nonatomic) BOOL isCompleted;
 @property(nonatomic, retain) NSNumber *bucketListItemId;
 

@@ -16,15 +16,19 @@
   RKEntityMapping *itemMapping = [RKEntityMapping
       mappingForEntityForName:@"JGBucketListEntry"
          inManagedObjectStore:[RKManagedObjectStore defaultStore]];
+
   NSDictionary *mappingDictionary = @{
+    @"uuid" : @"uuid",
     @"id" : @"bucketListItemId",
     @"title" : @"title",
     @"is_completed" : @"isCompleted",
   };
-  [itemMapping addAttributeMappingsFromDictionary:mappingDictionary];
 
-  itemMapping.identificationAttributes = @[ @"bucketListItemId" ];
+  itemMapping.identificationAttributes = @[ @"uuid" ];
+
+  [itemMapping addAttributeMappingsFromDictionary:mappingDictionary];
 
   return itemMapping;
 }
+
 @end
