@@ -34,6 +34,7 @@
 		E94E14C119B7AF9F004B01E5 /* JGBucketListItemManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E94E14C019B7AF9F004B01E5 /* JGBucketListItemManager.m */; };
 		E94E14C419B8A43A004B01E5 /* JGManagedObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = E94E14C319B8A43A004B01E5 /* JGManagedObjectStore.m */; };
 		E94E14C719B8C725004B01E5 /* JGAttributeHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E94E14C619B8C725004B01E5 /* JGAttributeHelper.m */; };
+		E964937319C71E0F00615EA6 /* JGBucketListFetchedResultsDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E964937219C71E0F00615EA6 /* JGBucketListFetchedResultsDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +89,8 @@
 		E94E14C319B8A43A004B01E5 /* JGManagedObjectStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGManagedObjectStore.m; sourceTree = "<group>"; };
 		E94E14C519B8C725004B01E5 /* JGAttributeHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGAttributeHelper.h; sourceTree = "<group>"; };
 		E94E14C619B8C725004B01E5 /* JGAttributeHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGAttributeHelper.m; sourceTree = "<group>"; };
+		E964937119C71E0F00615EA6 /* JGBucketListFetchedResultsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGBucketListFetchedResultsDelegate.h; sourceTree = "<group>"; };
+		E964937219C71E0F00615EA6 /* JGBucketListFetchedResultsDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGBucketListFetchedResultsDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -219,8 +222,8 @@
 		E94E14AC19B7A4D3004B01E5 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
-				E93B70A119B0C28300763CF1 /* JGAppDelegate.h */,
-				E93B70A219B0C28300763CF1 /* JGAppDelegate.m */,
+				E964936F19C71DDD00615EA6 /* JGBucketListFetchedResultsDelegate */,
+				E964936E19C71DD500615EA6 /* AppDelegate */,
 			);
 			name = Delegates;
 			sourceTree = "<group>";
@@ -338,6 +341,24 @@
 				E94E14C319B8A43A004B01E5 /* JGManagedObjectStore.m */,
 			);
 			name = RestKit;
+			sourceTree = "<group>";
+		};
+		E964936E19C71DD500615EA6 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				E93B70A119B0C28300763CF1 /* JGAppDelegate.h */,
+				E93B70A219B0C28300763CF1 /* JGAppDelegate.m */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		E964936F19C71DDD00615EA6 /* JGBucketListFetchedResultsDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				E964937119C71E0F00615EA6 /* JGBucketListFetchedResultsDelegate.h */,
+				E964937219C71E0F00615EA6 /* JGBucketListFetchedResultsDelegate.m */,
+			);
+			name = JGBucketListFetchedResultsDelegate;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -476,6 +497,7 @@
 				E93B709F19B0C28300763CF1 /* main.m in Sources */,
 				E94E14C719B8C725004B01E5 /* JGAttributeHelper.m in Sources */,
 				E93B70A619B0C28300763CF1 /* JGBucketList.xcdatamodeld in Sources */,
+				E964937319C71E0F00615EA6 /* JGBucketListFetchedResultsDelegate.m in Sources */,
 				E94E14BB19B7ABE4004B01E5 /* MappingProvider.m in Sources */,
 				E93B70C719B0C77800763CF1 /* JGCoreDataStack.m in Sources */,
 				E94E14BE19B7AD27004B01E5 /* JGObjectManager.m in Sources */,
